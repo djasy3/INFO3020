@@ -1,7 +1,7 @@
 /*
 	NOM : MUKEYA KASSINDYE
-	NI : A00158681
-			FICHIER SOURCE : dans ce fichier on implémente toute les méthodes relatives aux ordinateurs
+
+			FICHIER SOURCE : dans ce fichier on implÃ©mente toute les mÃ©thodes relatives aux ordinateurs
 */
 #include "ordinateur.h"
 
@@ -22,10 +22,10 @@ Ordinateur::Ordinateur(void)
 Ordinateur::~Ordinateur(void)
 {
 }
-//accesseur nous permettant d'avoir un nombre d'ordinateur auxquels attribuer des adresses privée et numero de port
+//accesseur nous permettant d'avoir un nombre d'ordinateur auxquels attribuer des adresses privÃ©e et numero de port
 void Ordinateur::setNombreOrdisPr(int nbre) { this->m_nbreAdrPr = nbre; }
 void Ordinateur::setNombreOrdisPub(int nbre ){ this->m_nbreAdrPub = nbre; }
-//méthode qui renvoi génère les adresse publique en fonction du nombre d'ordinateur privés
+//mÃ©thode qui renvoi gÃ©nÃ¨re les adresse publique en fonction du nombre d'ordinateur privÃ©s
 vector<string>Ordinateur::genererAdrPrive()
 {
 	if(this->m_nbreAdrPr == 0)
@@ -37,13 +37,13 @@ vector<string>Ordinateur::genererAdrPrive()
 	{
 		for(int i(0); i < this->m_nbreAdrPr; ++i)
 		{
-			this->m_plageAdresses = "192.168.0.";//6ème case reservée pour la partie hôte
+			this->m_plageAdresses = "192.168.0.";//6Ã¨me case reservÃ©e pour la partie hÃ´te
 			this->m_adressesPrivees.push_back(this->m_plageAdresses.append(to_string(i+1)));
 		}
 		return this->m_adressesPrivees;
 	}
 }
-//méthode pour générer les ip des ordi qui sont publique
+//mÃ©thode pour gÃ©nÃ©rer les ip des ordi qui sont publique
 vector<string>Ordinateur::genererAdrPublique()
 {
 	if(this->m_nbreAdrPub == 0)
@@ -55,13 +55,13 @@ vector<string>Ordinateur::genererAdrPublique()
 	{
 		for(int i(0); i < this->m_nbreAdrPub; ++i)
 		{
-			this->m_plageAdresses = "133.168.0.";//6ème case reservée pour la partie hôte
+			this->m_plageAdresses = "133.168.0.";//6Ã¨me case reservÃ©e pour la partie hÃ´te
 			this->m_adressesPubliques.push_back(this->m_plageAdresses.append(to_string(i+1)));
 		}
 		return this->m_adressesPubliques;
 	}
 }
-//méthode pour obtenir une adresse privé et l'attribuer à un ordinateur
+//mÃ©thode pour obtenir une adresse privÃ© et l'attribuer Ã  un ordinateur
 string Ordinateur::getAdressePr() 
 { 
 	string temp = this->m_adressesPrivees.back();
@@ -75,7 +75,7 @@ string Ordinateur::getAdressePub()
 	this->m_adressesPubliques.pop_back();
 	return  temp;
 }
-////fonction qui libère l'adresse après utilisation
+////fonction qui libÃ¨re l'adresse aprÃ¨s utilisation
 //void Ordinateur::setAdressePub(string adrs)
 //{
 //	this->m_adressesPubliques.push_back(adrs);
@@ -85,19 +85,19 @@ string Ordinateur::getAdressePub()
 //{
 //	this->m_adressesPrivees.push_back(adrs);
 //}
-//méthode pour générer les ports publique est privés
+//mÃ©thode pour gÃ©nÃ©rer les ports publique est privÃ©s
 void Ordinateur::setPort(string adrs)
 {
 	intervalle = MAX - MIN;
-	//on vérifie si l'adresse est publique ou privé pour générer un port approprié
+	//on vÃ©rifie si l'adresse est publique ou privÃ© pour gÃ©nÃ©rer un port appropriÃ©
 	if(adrs.substr(0,7) == "192.168" || adrs.substr(0,6) == "172.16" || adrs.substr(0,2) == "10")
 		this->m_port  = MIN + (rand() % intervalle);
 	else
 		this->m_port = (rand() % 1023) + 1;
 }
-//méthode qui renvoi un port
+//mÃ©thode qui renvoi un port
 int Ordinateur::getPort(){ return this->m_port; }
-//donner l'authorisation à un ordi publique de communiquer avec un ordinateur privé
+//donner l'authorisation Ã  un ordi publique de communiquer avec un ordinateur privÃ©
 void Ordinateur::setAuth(bool ok){ this->m_auth = ok; }
 //
 bool Ordinateur::getAuth(){ return this->m_auth; }
@@ -107,14 +107,14 @@ string Ordinateur::getNomOrdi() { return this->m_nomOrdi;}
 string Ordinateur::getIpOrdi() { return this->m_ip; }
 //
 void Ordinateur::setIpOrdi(string ip) { this->m_ip = ip; }
-//cette méthode va nous permettre de construire un vecteur d'ordinateurs privés(local)
+//cette mÃ©thode va nous permettre de construire un vecteur d'ordinateurs privÃ©s(local)
 vector<Ordinateur> Ordinateur::getDetailsOrdisPrives()	//renvoi toutes les informations concernant un ordinateur(dns, ip, port)
 {
 	this->genererAdrPrive();
 	//
 	for(int i(0); i < this->m_nbreAdrPr; ++i)
 	{
-		this->m_ip = this->getAdressePr();	//on donne un adresse à notre objet
+		this->m_ip = this->getAdressePr();	//on donne un adresse Ã  notre objet
 		this->setPort(m_ip);
 		this->m_nomOrdi = "X";				//tout les ordi locaux commenceront avec un X
 		this->m_nomOrdi.append(to_string(i+1));
@@ -125,14 +125,14 @@ vector<Ordinateur> Ordinateur::getDetailsOrdisPrives()	//renvoi toutes les infor
 	//on retourne nos ordi
 	return tempPr;
 }
-//on génère les ordis publiques
+//on gÃ©nÃ¨re les ordis publiques
 vector<Ordinateur> Ordinateur::getDetailsOrdisPubliques()	//renvoi toutes les informations concernant un ordinateur(dns, ip, port)
 {
 	this->genererAdrPublique();
 	//
 	for(int i(0); i < this->m_nbreAdrPub; ++i)
 	{
-		this->m_ip = this->getAdressePub();	//on donne un adresse à notre objet
+		this->m_ip = this->getAdressePub();	//on donne un adresse Ã  notre objet
 		this->setPort(m_ip);
 		this->m_nomOrdi = "Y";				//tout les ordi locaux commenceront avec un X
 		this->m_nomOrdi.append(to_string(i+1));
@@ -143,14 +143,14 @@ vector<Ordinateur> Ordinateur::getDetailsOrdisPubliques()	//renvoi toutes les in
 	//on retourne nos ordi
 	return tempPub;
 }
-//méthode afficher
+//mÃ©thode afficher
 void Ordinateur::afficher()
 {
 	cout<< "Nom:\t" << this->getNomOrdi()<< endl
 		<< "Ip:\t"  << this->getIpOrdi() << endl
 		<< "Port:\t"<< this->getPort()    << endl;
 	if(this->getAuth() == true)
-		cout<< "In:\tTrue" << endl;//le champ in permet de spécifier si l'ordinateur accepte de communiquer avec lui ou pas
+		cout<< "In:\tTrue" << endl;//le champ in permet de spÃ©cifier si l'ordinateur accepte de communiquer avec lui ou pas
 	else
 		cout<< "In:\tFalse"<< endl;
 }
