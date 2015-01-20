@@ -1,6 +1,6 @@
 /*
 	NOM : MUKEYA KASSINDYE
-	NI : A00158681
+
 			FICHIER SOURCE : dans ce fichier on implémente toute les méthodes relatives au serveur nat
 */
 #include "nat.h"
