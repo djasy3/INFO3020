@@ -1,10 +1,9 @@
 /*
 	NOM: MUKEYA KASSINDYE
-	NI : A00158681
 
 	FICHIER MAIN: contient le corps du programme
-	NB: Premier scenario implÈmentÈ
-		DeuxiËme scenario en cours...
+	NB: Premier scenario impl√©ment√©
+		Deuxi√®me scenario en cours...
 */
 #include <iostream>
 #include <iomanip>
@@ -20,15 +19,15 @@ bool continuer();
 
 int main (int argc, char *argv[])
 {
-	Nat *serveurNat =  new Nat();//on crÈe notre objet NAT
-    serveurNat->setNbreAdr(5);//on lui attribue un nombre d'adresse ‡ generer
-	serveurNat->genererAdrPub();//ensuite il gÈnËre les adresses
+	Nat *serveurNat =  new Nat();//on cr√©e notre objet NAT
+    serveurNat->setNbreAdr(5);//on lui attribue un nombre d'adresse √† generer
+	serveurNat->genererAdrPub();//ensuite il g√©n√®re les adresses
     //
 	Ordinateur *ordiPub = new Ordinateur();	//objet ordinateur publique
 	ordiPub->setNombreOrdisPub(3);			//nombre d'ordis publiques
 
-	Ordinateur *ordiPr = new Ordinateur();	//objet ordinateur privÈ
-	ordiPr->setNombreOrdisPr(5);			//nombre d'ordi privÈs
+	Ordinateur *ordiPr = new Ordinateur();	//objet ordinateur priv√©
+	ordiPr->setNombreOrdisPr(5);			//nombre d'ordi priv√©s
     
 	//on affiche les ordinateurs locaux
 	vector<Ordinateur> ordiL = ordiPr->getDetailsOrdisPrives();
@@ -53,7 +52,7 @@ int main (int argc, char *argv[])
 	string choixOrdi1 = " ";//l'ordi pubique que l'utilisateur choisira pour recevoir le message
 	string choixOrdi2 = " ";//l'ordi local que l'utilisateur choisira pour envoyer le message
 	char directionMsg;	//choix de la direction du message
-	int pos1 = -1, pos2 = -1;	//variables qui renvoi les positions des ordinateurs ‡ partir de la table
+	int pos1 = -1, pos2 = -1;	//variables qui renvoi les positions des ordinateurs √† partir de la table
 	
 	while(encore)
 	{
@@ -61,11 +60,11 @@ int main (int argc, char *argv[])
 		cin >> choixOrdi1;
 		cout << "Choisir un Ordinateur publique en entrant son numero: " << endl;
 		cin >> choixOrdi2;
-		cout << "Votre message doit Ítre envoye de 1: " << choixOrdi1 << " -> " << choixOrdi2 << " ou de 2: " << choixOrdi1 << " <- " << choixOrdi2 << endl;
+		cout << "Votre message doit √™tre envoye de 1: " << choixOrdi1 << " -> " << choixOrdi2 << " ou de 2: " << choixOrdi1 << " <- " << choixOrdi2 << endl;
 		cout << "Entrer 1 ou 2" << endl;
 		cin >> directionMsg;
 		//on renvoi les positions des ordi se trouvant dans le tableaux si ces varibles correspondent
-		//ceci vÈrifie si les noms des ordinateurs que le user ‡ donner existe
+		//ceci v√©rifie si les noms des ordinateurs que le user √† donner existe
 		for(unsigned int i(0); i < ordiL.size(); ++i )
 		{
 			if(ordiL.at(i).getNomOrdi() == choixOrdi1)
@@ -114,13 +113,13 @@ int main (int argc, char *argv[])
 
 	return 0;
 }
-//mÈthode qui nous simule l'envoi du message
+//m√©thode qui nous simule l'envoi du message
 void sendMessage( Ordinateur &from, Ordinateur &to, Nat *srv, int cas )
 {
 	//si c'est le premier cas, donc M>=N
 	if(cas == 1)
 	{
-		//on affiche les dÈtails de l'ordinateur qui envoi le message et les dÈtails sur son destinataire
+		//on affiche les d√©tails de l'ordinateur qui envoi le message et les d√©tails sur son destinataire
 		cout << "Expediteur"  << endl;
 		from.afficher();
 		cout << "Destinataire"<< endl;
@@ -128,15 +127,15 @@ void sendMessage( Ordinateur &from, Ordinateur &to, Nat *srv, int cas )
 		cout << endl;
 		//ensuite le traitement du Nat
 		cout << "Attribution d'une adresse publique par le N.A.T" << endl;
-		//on vÈrifie l'ordinateur privÈ avait dÈj‡ une adresse publique avant d'en lui attribuer
+		//on v√©rifie l'ordinateur priv√© avait d√©j√† une adresse publique avant d'en lui attribuer
 		if(!srv->hasAdrPub(from.getIpOrdi()))
 			from.setIpOrdi(srv->attribAdrPub(from.getIpOrdi()));
 		//on affiche la table de correspondance
 		srv->afficherTableDeCorrespondance();
 		cout << endl;
-		//l'ordinateur local donne l'authorisation pour qu'il puisse accepter les communications de l'extÈrieur
+		//l'ordinateur local donne l'authorisation pour qu'il puisse accepter les communications de l'ext√©rieur
 		from.setAuth(true);
-		//on rÈaffiche l'ordinateur locale avec la nouvelle adresse
+		//on r√©affiche l'ordinateur locale avec la nouvelle adresse
 		cout << "Expediteur(nouvelle adresse)"  << endl;
 		from.afficher();
 		cout << "Destinataire"<< endl;
@@ -146,11 +145,11 @@ void sendMessage( Ordinateur &from, Ordinateur &to, Nat *srv, int cas )
 	}
 	else if(cas == 2)
 	{
-		//on vÈrifie si l'ordinateur privÈ accepte les connection de l'extÈrieur
-		//la communication sera Ètablie si l'ordinateur publique ‡ dÈj‡ communiquÈ une fois avec l'ordi local
+		//on v√©rifie si l'ordinateur priv√© accepte les connection de l'ext√©rieur
+		//la communication sera √©tablie si l'ordinateur publique √† d√©j√† communiqu√© une fois avec l'ordi local
 		if(from.getAuth() == true)
 		{
-			//on affiche les dÈtails de l'ordinateur qui envoi le message et les dÈtails sur son destinataire
+			//on affiche les d√©tails de l'ordinateur qui envoi le message et les d√©tails sur son destinataire
 			cout << "Expediteur"  << endl;
 			to.afficher();
 			cout << "Destinataire"<< endl;
@@ -158,19 +157,19 @@ void sendMessage( Ordinateur &from, Ordinateur &to, Nat *srv, int cas )
 			cout << endl;
 			//ensuite le traitement du Nat
 			cout << "Reattribution d'une adresse privee par le N.A.T" << endl;
-			//on vÈrifie l'ordinateur privÈ avait dÈj‡ une adresse publique avant d'en lui attribuer
+			//on v√©rifie l'ordinateur priv√© avait d√©j√† une adresse publique avant d'en lui attribuer
 			if(srv->hasAdrPub(from.getIpOrdi()))
 				from.setIpOrdi(srv->rattribAdrPub(from.getIpOrdi()));
 			//on affiche la table de correspondance
 			srv->afficherTableDeCorrespondance();
 			cout << endl;
-			//on rÈaffiche l'ordinateur locale avec la nouvelle adresse
+			//on r√©affiche l'ordinateur locale avec la nouvelle adresse
 			cout << "Expediteur(nouvelle adresse)"  << endl;
 			to.afficher();
 			cout << "Destinataire"<< endl;
 			from.afficher();
 			cout << endl;
-			cout << "message envoyÈ..." << endl;
+			cout << "message envoy√©..." << endl;
 		}
 		else
 		{
@@ -178,7 +177,7 @@ void sendMessage( Ordinateur &from, Ordinateur &to, Nat *srv, int cas )
 		}
 	}
 }
-//fonction demandant ‡ l'utilisateur veux continuer ou pas
+//fonction demandant √† l'utilisateur veux continuer ou pas
 bool continuer()
 {
 	char reponse = ' ';
